@@ -17,7 +17,7 @@ Person person = PersonDao.getPersonById(Integer.parseInt(id));
 <input type="hidden" name="id" value="<%=person.getId()%>"
     <table>
         <tr><td>Name:</td><td><input type="text" name="userName" value="<%=person.getUserName()%>"/></td></tr>
-        <tr><td>Password:</td><td><input type="password" name="userPass" value="<%=person.getUserPass()%>"/></td></tr>
+        <tr><td>Password:</td><td><input type="password" name="userPass" value="***"/></td></tr>
         <tr><td>Email:</td><td><input type="email" name="userEmail" value="<%=person.getUserEmail()%>"/></td></tr>
         <tr><td>Country:</td><td>
             <select name="userCountry" style="width:150px">

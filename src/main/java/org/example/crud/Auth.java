@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static javax.swing.text.html.parser.DTDConstants.ID;
+
 @WebServlet("/auth")
 public class Auth extends HttpServlet {
 
@@ -32,10 +34,22 @@ public class Auth extends HttpServlet {
             httpSession.setAttribute("userName", returnedPerson.getUserName());
             httpSession.setAttribute("userEmail", returnedPerson.getUserEmail());
             httpSession.setAttribute("userCountry", returnedPerson.getUserCountry());
+            httpSession.setAttribute("userAvatar", returnedPerson.getUserAvatar());
+            String nameFileAvatar = "\"avatar/zero.jpg\"";
+
+            if (returnedPerson.getUserAvatar()){
+                nameFileAvatar = "\"avatar/"+ String.valueOf(returnedPerson.getId()) +".jpg\"";
+            }
+
+            httpSession.setAttribute("nameFileAvatar", nameFileAvatar);
+
             System.out.println(returnedPerson.getId());
             System.out.println(returnedPerson.getUserName());
             System.out.println(returnedPerson.getUserEmail());
             System.out.println(returnedPerson.getUserCountry());
+            System.out.println(returnedPerson.getUserAvatar());
+            System.out.println(nameFileAvatar);
+
             if (returnedPerson.getRole() == Person.ROLE.ADMIN){
                 printWriter.print("<h1>User succesfully saved</h1>");
                 response.sendRedirect("authed_admin.jsp");

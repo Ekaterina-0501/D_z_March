@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>welcome page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <h1>Welcome</h1>
-<h2>Login</h2>
+
+
+<div class="regForm">
+    <img src="avatar/zero.jpg"width="200" height="211" alt="avatar" />
+<h2></h2>
 <form action="auth" method="post">
   <table>
     <tr><td>Email:</td><td><input type="email" name="userEmail"/></td></tr>
     <tr><td>Password:</td><td><input type="password" name="userPass"/></td></tr>
   </table>
-    <tr><td colspan="2"><input type="submit" value="auth"/></td></tr>
+    <tr><td colspan="2"><input type="submit" value="Enter"/></td></tr>
+    <p></p>
+    <a href="reg_user.html">Register</a>
 </form>
-<a href="reg_user.html">registration</a>
+</div>
+
 </body>
 </html>

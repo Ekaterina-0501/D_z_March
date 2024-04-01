@@ -28,9 +28,10 @@ public class Register_user extends HttpServlet {
         person.setUserCountry(userCountry);
         person.setRole(Person.ROLE.USER);
 
+
         int status = PersonDao.save(person);
         if (status >0){
-            response.sendRedirect("authed_person.jsp");
+            response.sendRedirect("auth.html");
 
         }
         else {

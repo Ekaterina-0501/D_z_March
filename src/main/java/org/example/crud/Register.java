@@ -38,6 +38,8 @@ public class Register extends HttpServlet {
 			printWriter.print("Something went wrong");
 		}
 
+
+
 		printWriter.close();
 	}
 

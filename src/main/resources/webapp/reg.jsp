@@ -9,6 +9,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Insert title here</title>
+    <link rel="stylesheet" href="reg.css">
 </head>
 <body>
 
@@ -32,11 +33,14 @@
                         <option>ADMIN</option>
                     </select>
          </td></tr>
+
         <tr><td colspan="2"><input type="submit" value="register"/></td></tr>
     </table>
 </form>
 
 <br/>
+
+<p></p>
 <a href="viewusers.jsp">view all users</a>
 <form action="logout" method="post">
 <input type="submit" value="Logout" >

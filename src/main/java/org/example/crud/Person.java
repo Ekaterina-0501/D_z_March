@@ -4,8 +4,10 @@ public class Person {
     private String userName;
     private String userPass;
     private String userEmail;
+
     private String userCountry;
     private  ROLE role;
+    private boolean userAvatar;
     public  ROLE getRole() {
         return role;
     }
@@ -44,6 +46,12 @@ public class Person {
     }
     public void setUserCountry(String userCountry) {
         this.userCountry = userCountry;
+    }
+    public boolean getUserAvatar() {
+        return userAvatar;
+    }
+    public void setUserAvatar(boolean userAvatar) {
+        this.userAvatar = userAvatar;
     }
 
 }

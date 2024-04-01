@@ -25,7 +25,7 @@ public class PersonDao {
         int status = 0;
         try {
             Connection connection = PersonDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into crud_example (userName,userPass,userEmail,userCountry,role) values(?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into crud_example (userName,userPass,userEmail,userCountry,role,useravatar) values(?,?,?,?,?,false)");
             preparedStatement.setString(1, person.getUserName());
             preparedStatement.setString(2, person.getUserPass());
             preparedStatement.setString(3, person.getUserEmail());
@@ -54,6 +54,7 @@ public class PersonDao {
                 person.setUserEmail(resultSet.getString(4));
                 person.setUserCountry(resultSet.getString(5));
                 person.setRole(Person.ROLE.valueOf(resultSet.getString(6)));
+                person.setUserAvatar(resultSet.getBoolean(7));
                 arrayList.add(person);
             }
         } catch (SQLException e) {
@@ -93,6 +94,7 @@ public class PersonDao {
                 person.setUserEmail(resultSet.getString(4));
                 person.setUserCountry(resultSet.getString(5));
                 person.setRole(Person.ROLE.valueOf(resultSet.getString(6)));
+                person.setUserAvatar(resultSet.getBoolean(7));
             }
 
         } catch (SQLException e) {
@@ -103,20 +105,58 @@ public class PersonDao {
 
     public static int update(Person person) {
         int status = 0;
-        try {
-            Connection connection = PersonDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("update crud_example set userName=?,userPass=?,userEmail=?,userCountry=?,role=? where id=?");
-            preparedStatement.setString(1, person.getUserName());
-            preparedStatement.setString(2, Hesh_Password.HeshPassword(person.getUserPass()));
-            preparedStatement.setString(3, person.getUserEmail());
-            preparedStatement.setString(4, person.getUserCountry());
-            preparedStatement.setString(5, String.valueOf(person.getRole()));
-            preparedStatement.setInt(6, person.getId());
-            status = preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+        if (person.getUserPass().equals("***")){
+            try {
+                Connection connection = PersonDao.getConnection();
+
+                PreparedStatement preparedStatement = connection.prepareStatement("update crud_example set userName=?,userEmail=?,userCountry=?,role=? where id=?");
+                preparedStatement.setString(1, person.getUserName());
+
+                preparedStatement.setString(2, person.getUserEmail());
+                preparedStatement.setString(3, person.getUserCountry());
+                preparedStatement.setString(4, String.valueOf(person.getRole()));
+                preparedStatement.setInt(5, person.getId());
+
+                status = preparedStatement.executeUpdate();}
+            catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         }
-        return status;
+        else {
+            try {
+                Connection connection = PersonDao.getConnection();
+
+                PreparedStatement preparedStatement = connection.prepareStatement("update crud_example set userName=?,userPass=?,userEmail=?,userCountry=?,role=? where id=?");
+                preparedStatement.setString(1, person.getUserName());
+                preparedStatement.setString(2, Hesh_Password.HeshPassword(person.getUserPass()));
+                preparedStatement.setString(3, person.getUserEmail());
+                preparedStatement.setString(4, person.getUserCountry());
+                preparedStatement.setString(5, String.valueOf(person.getRole()));
+                preparedStatement.setInt(6, person.getId());
+
+                status = preparedStatement.executeUpdate();
+            }
+            catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+//        try {
+//            Connection connection = PersonDao.getConnection();
+//            PreparedStatement preparedStatement = connection.prepareStatement("update crud_example set userName=?,userPass=?,userEmail=?,userCountry=?,role=? where id=?");
+//            preparedStatement.setString(1, person.getUserName());
+//            preparedStatement.setString(2, Hesh_Password.HeshPassword(person.getUserPass()));
+//            preparedStatement.setString(3, person.getUserEmail());
+//            preparedStatement.setString(4, person.getUserCountry());
+//            preparedStatement.setString(5, String.valueOf(person.getRole()));
+//            preparedStatement.setInt(6, person.getId());
+//            status = preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+       return status;
     }
     public static Person getPersonByIdUser(int id) {
         Person person = new Person();
@@ -143,19 +183,67 @@ public class PersonDao {
 
     public static int updateUser(Person person) {
         int status = 0;
-        try {
+        if (person.getUserPass().equals("***")){
+            try {
             Connection connection = PersonDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("update crud_example set userName=?,userPass=?,userEmail=?,userCountry=? where id=?");
-            preparedStatement.setString(1, person.getUserName());
-            preparedStatement.setString(2, Hesh_Password.HeshPassword(person.getUserPass()));
-            preparedStatement.setString(3, person.getUserEmail());
-            preparedStatement.setString(4, person.getUserCountry());
-            preparedStatement.setInt(5, person.getId());
+                PreparedStatement preparedStatement = connection.prepareStatement("update crud_example set userName=?,userEmail=?,userCountry=? where id=?");
+                preparedStatement.setString(1, person.getUserName());
+                preparedStatement.setString(2, person.getUserEmail());
+                preparedStatement.setString(3, person.getUserCountry());
+                preparedStatement.setInt(4, person.getId());
 
-            status = preparedStatement.executeUpdate();
-        } catch (SQLException e) {
+
+            status = preparedStatement.executeUpdate();}
+        catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        }
+        else {
+            try {
+            Connection connection = PersonDao.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("update crud_example set userName=?,userPass=?,userEmail=?,userCountry=? where id=?");
+                preparedStatement.setString(1, person.getUserName());
+                preparedStatement.setString(2, Hesh_Password.HeshPassword(person.getUserPass()));
+                preparedStatement.setString(3, person.getUserEmail());
+                preparedStatement.setString(4, person.getUserCountry());
+                preparedStatement.setInt(5, person.getId());
+
+
+            status = preparedStatement.executeUpdate();
+            }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        }
+
+//        try {
+//
+//            if (person.getUserPass() == "***"){
+//                Connection connection = PersonDao.getConnection();
+//
+//                PreparedStatement preparedStatement = connection.prepareStatement("update crud_example set userName=?,userEmail=?,userCountry=? where id=?");
+//                preparedStatement.setString(1, person.getUserName());
+//                preparedStatement.setString(2, Hesh_Password.HeshPassword(person.getUserPass()));
+//                preparedStatement.setString(3, person.getUserEmail());
+//                preparedStatement.setString(4, person.getUserCountry());
+//                preparedStatement.setInt(5, person.getId());
+//                status = preparedStatement.executeUpdate();
+//            }
+//            else {
+//                Connection connection = PersonDao.getConnection();
+//                PreparedStatement preparedStatement = connection.prepareStatement("update crud_example set userName=?,userPass=?,userEmail=?,userCountry=? where id=?");
+//                preparedStatement.setString(1, person.getUserName());
+//                preparedStatement.setString(2, person.getUserEmail());
+//                preparedStatement.setString(3, person.getUserCountry());
+//                preparedStatement.setInt(4, person.getId());
+//                status = preparedStatement.executeUpdate();
+//            }
+//
+//
+//        }
+//        catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
         return status;
     }
 
@@ -175,6 +263,7 @@ public class PersonDao {
                 person.setUserEmail(resultSet.getString(4));
                 person.setUserCountry(resultSet.getString(5));
                 person.setRole(Person.ROLE.valueOf(resultSet.getString(6)));
+                person.setUserAvatar(resultSet.getBoolean(7));
                 return person;
 
             }

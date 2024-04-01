@@ -6,8 +6,10 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>View Persons</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="background">
 <h1>Persons list</h1>
 <%
 ArrayList<Person> arrayList = PersonDao.getAllPersons();
@@ -40,5 +42,6 @@ request.setAttribute("arrayList",arrayList);
 <p></p>
 <form action="logout" method="post">
 <input type="submit" value="Logout" >
+</div>
 </body>
 </html>
